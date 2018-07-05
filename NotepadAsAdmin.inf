@@ -1,0 +1,42 @@
+[version]
+signature="$CHICAGO$"
+
+[NotepadAsAdminInstall]
+CopyFiles = NotepadAsAdmin.Files.Inf
+AddReg    = NotepadAsAdmin.AddReg
+
+[DefaultInstall]
+CopyFiles = NotepadAsAdmin.Files.Inf
+AddReg    = NotepadAsAdmin.AddReg
+
+[DefaultUnInstall]
+DelFiles  = NotepadAsAdmin.Files.Inf
+DelReg    = NotepadAsAdmin.DelReg
+
+[SourceDisksNames]
+55="Notepad as Admin","",1
+
+[SourceDisksFiles]
+NotepadAsAdmin.INF=55
+
+[DestinationDirs]
+NotepadAsAdmin.Files.Inf = 17
+
+[NotepadAsAdmin.Files.Inf]
+NotepadAsAdmin.INF
+
+[NotepadAsAdmin.AddReg]
+HKLM,%UDHERE%,DisplayName,,"%NotepadAsAdminName%"
+HKLM,%UDHERE%,UninstallString,,"rundll32.exe syssetup.dll, SetupInfObjectInstallAction DefaultUninstall 132 %17%\NotepadAsAdmin.inf"
+HKCR,*\Shell\runas,,,"%NotepadAsAdminAccel%"
+HKCR,*\Shell\runas\command,,,"%11%\notepad.exe ""%1"""
+
+[NotepadAsAdmin.DelReg]
+HKLM,%UDHERE%
+HKCR,Directory\Shell\runas
+HKCR,Drive\Shell\runas
+
+[Strings]
+NotepadAsAdminName="Notepad as Admin PowerToy (Uninstall only)"
+NotepadAsAdminAccel="Notepad as Admin"
+UDHERE="Software\Microsoft\Windows\CurrentVersion\Uninstall\NotepadAsAdmin"
